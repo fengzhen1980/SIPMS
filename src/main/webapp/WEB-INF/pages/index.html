@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Information Management System</title>
+</head>
+<body>
+<!--@{/auth} 解析后：/demo/auth -->
+
+<form th:action="@{/auth}" method="post">
+    <!-- 传递method 请求参数，目的是为了让当前请求调用 AuthServlet 中的 login() 方法 -->
+    <input type="hidden" name="method" value="login"/>
+
+    <!-- th:text 解析表达式后会替换标签体 -->
+    <!-- ${attrName} 从请求域获取属性名为 attrName 的属性值 -->
+    <p style="color:red; font-weight: bold;" th:text="${message}"></p>
+    <p style="color:red; font-weight: bold;" th:text="${systemMessage}"></p>
+    <table style="width: 100%">
+        <tr>
+            <td style="text-align:right; width: 50%">
+                User Name:
+            </td>
+            <td style="text-align: left">
+                <input type="text" name="loginUserName"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right; width: 50%">
+                Password:
+            </td>
+            <td style="text-align: left">
+                <input type="password" name="loginPassword"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right; width: 50%">
+                <button type="submit">Login</button>
+            </td>
+            <td style="text-align:left; width: 50%">
+                <button type="reset">Clear</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<form th:action="@{/register}" method="post">
+    <input type="hidden" name="method" value="initRegister"/>
+    <table style="width: 100%">
+        <tr>
+            <td style="text-align:center;">
+                <button style="width: 200px" type="submit">Register</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

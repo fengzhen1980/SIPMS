@@ -1,0 +1,17 @@
+table.registerForm {
+    border: 1px outset rgb(153, 0, 153);
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.registerForm td {
+    border: 1px solid gray
+}
+
+col.column1 {
+    background-color: red
+}
+
+col.column2 {
+    background-color: blue
+}

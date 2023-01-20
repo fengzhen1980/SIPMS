@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>临时页面</title>
+</head>
+<body>
+    <p>临时页面</p>
+    <p th:text="${session.loginInfo}"></p>
+    <a th:href="@{/auth?method=logout}">退出</a>
+</body>
+</html>
