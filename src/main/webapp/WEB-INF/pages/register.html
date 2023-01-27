@@ -24,51 +24,66 @@
                 <input type="text" name="userId" th:value="${userId}"/>
             </td>
             <td style="text-align: left">
-                <p style="color:red; font-weight: bold;" th:text="${errMessage}"></p>
+                <p style="color:red; font-weight: bold;" th:text="${userIdErrMsg}"></p>
             </td>
         </tr>
         <tr style="height: 50px">
             <td style="text-align:right; width: 30%">
                 Password:
             </td>
-            <td style="text-align: left" colspan="2">
+            <td style="text-align: left">
                 <input type="password" name="password" th:value="${password}"/>
+            </td>
+            <td style="text-align: left">
+                <p style="color:red; font-weight: bold;" th:text="${passwordErrMsg}"></p>
             </td>
         </tr>
         <tr style="height: 50px">
             <td style="text-align:right; width: 30%">
                 Enter password again:
             </td>
-            <td style="text-align: left" colspan="2">
+            <td style="text-align: left">
                 <input type="password" name="passwordAgain" th:value="${passwordAgain}"/>
+            </td>
+            <td style="text-align: left">
+                <p style="color:red; font-weight: bold;" th:text="${passwordAgainErrMsg}"></p>
             </td>
         </tr>
         <tr style="height: 50px">
             <td style="text-align:right; width: 30%">
                 Category:
             </td>
-            <td style="text-align: left" colspan="2">
+            <td style="text-align: left">
                 <select name="userCategory" style="width: 100px; font-size: large">
                     <option th:selected="${userCategory==''}" value=""></option>
                     <option th:selected="${userCategory=='student'}" value="student">student</option>
                     <option th:selected="${userCategory=='teacher'}" value="teacher">teacher</option>
                 </select>
             </td>
+            <td style="text-align: left">
+                <p style="color:red; font-weight: bold;" th:text="${userCategoryErrMsg}"></p>
+            </td>
         </tr>
         <tr style="height: 50px">
             <td style="text-align:right; width: 30%">
                 First Name:
             </td>
-            <td style="text-align: left" colspan="2">
+            <td style="text-align: left">
                 <input type="text" name="userFirstName" th:value="${userFirstName}"/>
+            </td>
+            <td style="text-align: left">
+                <p style="color:red; font-weight: bold;" th:text="${firstNameErrMsg}"></p>
             </td>
         </tr>
         <tr style="height: 50px">
             <td style="text-align:right; width: 30%">
                 Last Name:
             </td>
-            <td style="text-align: left" colspan="2">
+            <td style="text-align: left">
                 <input type="text" name="userLastName" th:value="${userLastName}"/>
+            </td>
+            <td style="text-align: left">
+                <p style="color:red; font-weight: bold;" th:text="${lastNameErrMsg}"></p>
             </td>
         </tr>
         <tr style="height: 50px">
@@ -95,8 +110,11 @@
             <td style="text-align:right; width: 30%">
                 Email:
             </td>
-            <td style="text-align: left" colspan="2">
+            <td style="text-align: left">
                 <input type="text" name="userEmail" th:value="${userEmail}"/>
+            </td>
+            <td style="text-align: left">
+                <p style="color:red; font-weight: bold;" th:text="${emailErrMsg}"></p>
             </td>
         </tr>
         <tr style="height: 50px">

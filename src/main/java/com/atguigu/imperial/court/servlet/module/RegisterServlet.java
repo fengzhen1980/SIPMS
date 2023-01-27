@@ -32,6 +32,8 @@ public class RegisterServlet extends ModelBaseServlet {
 
         System.out.println("===doRegister===");
 
+        boolean inputErrFlag = false;
+
         String templateName = new String();
         // 获取请求参数
         String userId = request.getParameter("userId");
@@ -41,6 +43,9 @@ public class RegisterServlet extends ModelBaseServlet {
         String userFirstName = request.getParameter("userFirstName");
         String userLastName = request.getParameter("userLastName");
         String userAge = request.getParameter("userAge");
+        if (userAge.isEmpty()) {
+            userAge = "0";
+        }
         String userGender = request.getParameter("userGender");
         String userEmail = request.getParameter("userEmail");
         String userAddress = request.getParameter("userAddress");
@@ -52,7 +57,35 @@ public class RegisterServlet extends ModelBaseServlet {
         TUser userEntity = registerService.getUserByUserId(userId);
         if (userEntity != null) {
             // 将异常信息存入请求域
-            request.setAttribute("errMessage", SipmsCourtConst.USERID_EXIST_MESSAGE);
+            request.setAttribute("userIdErrMsg", SipmsCourtConst.USERID_EXIST_MESSAGE);
+            inputErrFlag = true;
+        }
+        if (password == null || password.trim().isEmpty()) {
+            request.setAttribute("passwordErrMsg", ("Password" + SipmsCourtConst.REQUIRED_MESSAGE));
+            inputErrFlag = true;
+        }
+        if (!password.equals(passwordAgain)) {
+            request.setAttribute("passwordAgainErrMsg", SipmsCourtConst.PW_AGAIN_MESSAGE);
+            inputErrFlag = true;
+        }
+        if (userCategory == null || userCategory.trim().isEmpty()) {
+            request.setAttribute("userCategoryErrMsg", ("Category" + SipmsCourtConst.REQUIRED_MESSAGE));
+            inputErrFlag = true;
+        }
+        if (userFirstName == null || userFirstName.trim().isEmpty()) {
+            request.setAttribute("firstNameErrMsg", ("First Name" + SipmsCourtConst.REQUIRED_MESSAGE));
+            inputErrFlag = true;
+        }
+        if (userLastName == null || userLastName.trim().isEmpty()) {
+            request.setAttribute("lastNameErrMsg", ("Last Name" + SipmsCourtConst.REQUIRED_MESSAGE));
+            inputErrFlag = true;
+        }
+        if (userEmail == null || userEmail.trim().isEmpty()) {
+            request.setAttribute("emailErrMsg", ("Email" + SipmsCourtConst.REQUIRED_MESSAGE));
+            inputErrFlag = true;
+        }
+
+        if (inputErrFlag) {
             writeBack(newUser, request);
         } else {
             registerService.registerUser(newUser);
