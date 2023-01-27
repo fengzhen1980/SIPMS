@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class RegisterServlet extends ModelBaseServlet {
 
+    // creat service
     private RegisterService registerService = new RegisterServiceImpl();
 
     protected void initRegister(HttpServletRequest request, HttpServletResponse response)
