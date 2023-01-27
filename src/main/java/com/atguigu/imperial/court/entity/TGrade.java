@@ -1,4 +1,4 @@
-package com.sample;
+package com.atguigu.imperial.court.entity;
 
 
 public class TGrade {
