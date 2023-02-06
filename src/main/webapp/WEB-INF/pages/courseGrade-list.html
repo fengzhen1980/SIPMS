@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student-list</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            margin: 0px auto 0px auto;
+        }
+
+        table th, td {
+            border: 1px solid blue;
+            text-align: center;
+        }
+
+        div {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <!-- register information -->
+    <span th:if="${session.loginInfo.userCategory == 'STUDENT'}">Student:
+            <span th:text="${session.loginInfo.userFirstName} "></span>
+            <span th:text="${session.loginInfo.userLastName} "></span>
+    </span>
+    <span th:if="${session.loginInfo.userCategory == 'TEACHER'}">Teacher:
+            <span th:text="${session.loginInfo.userFirstName} "></span>
+            <span th:text="${session.loginInfo.userLastName} "></span>
+    </span>
+    <a th:href="@{/auth?method=logout}">Logout</a>
+</div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>course No.</th>
+            <th>course title</th>
+            <th>grade</th>
+            <th>comment</th>
+        </tr>
+        </thead>
+        <tbody th:if="${#lists.isEmpty(gradeList)}">
+        <tr>
+            <td colspan="4">no grade information</td>
+        </tr>
+        </tbody>
+        <tbody th:if="${not #lists.isEmpty(gradeList)}">
+        <tr th:each="gradeThis : ${gradeList}">
+            <td>
+                <span th:if="${gradeThis.gradeValue >= 60}">
+                    <span th:text="${gradeThis.courseNo} " style="color:black"></span>
+                </span>
+                <span th:if="${gradeThis.gradeValue < 60}">
+                    <span th:text="${gradeThis.courseNo} " style="color:red"></span>
+                </span>
+            </td>
+            <td>
+                <span th:if="${gradeThis.gradeValue >= 60}">
+                    <span th:text="${gradeThis.courseTitle} " style="color:black"></span>
+                </span>
+                <span th:if="${gradeThis.gradeValue < 60}">
+                    <span th:text="${gradeThis.courseTitle} " style="color:red"></span>
+                </span>
+            </td>
+            <td>
+                <span th:if="${gradeThis.gradeValue >= 60}">
+                    <span th:text="${gradeThis.gradeValue} " style="color:black"></span>
+                </span>
+                <span th:if="${gradeThis.gradeValue < 60}">
+                    <span th:text="${gradeThis.gradeValue} " style="color:red"></span>
+                </span>
+            </td>
+            <td>
+                <span th:if="${gradeThis.gradeValue >= 60}">
+                    <span th:text="${gradeThis.gradeComment} " style="color:black"></span>
+                </span>
+                <span th:if="${gradeThis.gradeValue < 60}">
+                    <span th:text="${gradeThis.gradeComment} " style="color:red"></span>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,31 +1,12 @@
 package com.atguigu.imperial.court.entity;
 
-
-public class TGrade {
+public class StudentGrade {
 
     private String courseNo;
+    private String courseTitle;
     private String studentUserId;
     private String gradeValue;
     private String gradeComment;
-
-    public TGrade() {
-    }
-
-    public TGrade(String courseNo, String studentUserId, String gradeValue, String gradeComment) {
-        this.courseNo = courseNo;
-        this.studentUserId = studentUserId;
-        this.gradeValue = gradeValue;
-        this.gradeComment = gradeComment;
-    }
-
-    @Override
-    public String toString() {
-        return "TGrade{" +
-                "courseNo=" + courseNo +
-                ", studentUserName=" + studentUserId +
-                ", gradeValue=" + gradeValue +
-                ", gradeComment=" + gradeComment + "}";
-    }
 
     public String getCourseNo() {
         return courseNo;
@@ -33,6 +14,14 @@ public class TGrade {
 
     public void setCourseNo(String courseNo) {
         this.courseNo = courseNo;
+    }
+
+    public String getCourseTitle() {
+        return courseTitle;
+    }
+
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
     }
 
     public String getStudentUserId() {
@@ -50,7 +39,7 @@ public class TGrade {
     public void setGradeValue(String gradeValue) {
         this.gradeValue = gradeValue;
     }
-    
+
     public String getGradeComment() {
         return gradeComment;
     }
@@ -58,5 +47,4 @@ public class TGrade {
     public void setGradeComment(String gradeComment) {
         this.gradeComment = gradeComment;
     }
-
 }

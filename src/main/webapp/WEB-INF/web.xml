@@ -44,6 +44,17 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>gradeServlet</servlet-name>
+        <servlet-class>com.atguigu.imperial.court.servlet.module.GradeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>gradeServlet</servlet-name>
+        <url-pattern>/grade</url-pattern>
+    </servlet-mapping>
+
+
     <servlet>
         <servlet-name>workServlet</servlet-name>
         <servlet-class>com.atguigu.imperial.court.servlet.module.WorkServlet</servlet-class>

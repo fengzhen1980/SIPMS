@@ -31,7 +31,7 @@ public class AuthServlet extends ModelBaseServlet {
             // 3. 通过 request 获取 HttpSession 对象
             HttpSession session = request.getSession();
 
-            // 4. 将查询到的 Emp 对象存入 Session 域
+            // 4. 将查询到的 User 对象存入 Session 域
             session.setAttribute(SipmsCourtConst.LOGIN_USER_ATTR_NAME, tUser);
 
             // 5.前往指定的页面视图
@@ -39,7 +39,13 @@ public class AuthServlet extends ModelBaseServlet {
             // String templateName = "temp";
             //processTemplate(templateName, request, response);
             // 前往正式的目标地址
-            response.sendRedirect(request.getContextPath() + "/work?method=showMemorialsDigestList");
+            //response.sendRedirect(request.getContextPath() + "/work?method=showMemorialsDigestList");
+            if ("student".equalsIgnoreCase(tUser.getUserCategory())) {
+                response.sendRedirect(request.getContextPath() + "/grade?method=showGradeForOneStudent");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/student?method=showAllStudentInfo");
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
