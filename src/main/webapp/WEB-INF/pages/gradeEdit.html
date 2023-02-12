@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit grade</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            margin: 0px auto 0px auto;
+        }
+
+        table th, td {
+            border: 1px solid blue;
+            text-align: center;
+        }
+
+        div {
+            text-align: right;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function clean() {
+            var obj1 = document.getElementById("gradeValue");
+            var obj2 = document.getElementById("comment");
+            obj1.value = "";
+            obj2.value = "";
+        }
+    </script>
+</head>
+<body>
+<div>
+    <!-- register information -->
+    <span th:if="${session.loginInfo.userCategory == 'student'}">Student:
+            <span th:text="${session.loginInfo.userFirstName} "></span>
+            <span th:text="${session.loginInfo.userLastName} "></span>
+    </span>
+    <span th:if="${session.loginInfo.userCategory == 'teacher'}">Teacher:
+            <span th:text="${session.loginInfo.userFirstName} "></span>
+            <span th:text="${session.loginInfo.userLastName} "></span>
+    </span>
+    <a th:href="@{/auth?method=logout}">Logout</a>
+</div>
+<form th:action="@{/edit}" method="post">
+    <input type="hidden" name="method" value="saveEdit"/>
+    <input type="hidden" name="courseNo" th:value="${studentGradeItem.courseNo}"/>
+    <input type="hidden" name="courseTitle" th:value="${studentGradeItem.courseTitle}"/>
+    <input type="hidden" name="studentId" th:value="${studentGradeItem.studentId}"/>
+    <input type="hidden" name="studentName" th:value="${studentGradeItem.studentName}"/>
+    <input type="hidden" name="existGrade" th:value="${studentGradeItem.existGrade}"/>
+    <table style="margin: auto; width: 900px;background-color: white; border-collapse:collapse;">
+        <tr>
+            <td style="text-align:right; width: 30%">Course No.</td>
+            <td th:text="${studentGradeItem.courseNo}"></td>
+        </tr>
+        <tr>
+            <td style="text-align:right; width: 30%">Course Title</td>
+            <td th:text="${studentGradeItem.courseTitle}"></td>
+        </tr>
+        <tr>
+            <td style="text-align:right; width: 30%">Student Id</td>
+            <td th:text="${studentGradeItem.studentId}"></td>
+        </tr>
+        <tr>
+            <td style="text-align:right; width: 30%">Student Name</td>
+            <td th:text="${studentGradeItem.studentName}"></td>
+        </tr>
+        <tr>
+            <td style="text-align:right; width: 30%">Grade</td>
+            <td style="text-align: left">
+                <input type="text" id="gradeValue" name="gradeValue" size="10 px"
+                       th:value="${studentGradeItem.gradeValue}"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right; width: 30%">Comment</td>
+            <td style="text-align: left">
+                <input type="text" id="comment" name="comment" size="100 px" th:value="${studentGradeItem.comment}"/>
+            </td>
+        </tr>
+    </table>
+    <table style="margin: auto; width: 900px;background-color: white; border-collapse:collapse;">
+        <tr style="height: 50px">
+            <td style="text-align:right; width: 50%">
+                <button style="width: 100px" type="submit">Save</button>
+            </td>
+            <td style="text-align:left; width: 50%">
+                <button style="width: 100px" onclick="clean();">Clean</button>
+            </td>
+        </tr>
+    </table>
+    <a th:href="@{/grade?method=showGradeForOneTeacher}">Back</a>
+</form>
+
+</body>
+</html>

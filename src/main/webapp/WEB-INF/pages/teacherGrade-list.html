@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>grade-list</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            margin: 0px auto 0px auto;
+        }
+
+        table th, td {
+            border: 1px solid blue;
+            text-align: center;
+        }
+
+        div {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <!-- register information -->
+    <span th:if="${session.loginInfo.userCategory == 'student'}">Student:
+            <span th:text="${session.loginInfo.userFirstName} "></span>
+            <span th:text="${session.loginInfo.userLastName} "></span>
+    </span>
+    <span th:if="${session.loginInfo.userCategory == 'teacher'}">Teacher:
+            <span th:text="${session.loginInfo.userFirstName} "></span>
+            <span th:text="${session.loginInfo.userLastName} "></span>
+    </span>
+    <a th:href="@{/auth?method=logout}">Logout</a>
+</div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>course No.</th>
+            <th>course title</th>
+            <th>student id</th>
+            <th>student name</th>
+            <th>grade</th>
+            <th>comment</th>
+            <th>EDIT</th>
+        </tr>
+        </thead>
+        <tbody th:if="${#lists.isEmpty(studentGradeList)}">
+        <tr>
+            <td colspan="7">no student information</td>
+        </tr>
+        </tbody>
+        <tbody th:if="${not #lists.isEmpty(studentGradeList)}">
+        <tr th:each="studentThis : ${studentGradeList}">
+            <td>
+                <span th:if="${studentThis.gradeValue >= 60}">
+                    <span th:text="${studentThis.courseNo} " style="color:black"></span>
+                </span>
+                <span th:if="${studentThis.gradeValue < 60}">
+                    <span th:text="${studentThis.courseNo} " style="color:red"></span>
+                </span>
+            </td>
+            <td>
+                <span th:if="${studentThis.gradeValue >= 60}">
+                    <span th:text="${studentThis.courseTitle} " style="color:black"></span>
+                </span>
+                <span th:if="${studentThis.gradeValue < 60}">
+                    <span th:text="${studentThis.courseTitle} " style="color:red"></span>
+                </span>
+            </td>
+            <td>
+                <span th:if="${studentThis.gradeValue >= 60}">
+                    <span th:text="${studentThis.studentId} " style="color:black"></span>
+                </span>
+                <span th:if="${studentThis.gradeValue < 60}">
+                    <span th:text="${studentThis.studentId} " style="color:red"></span>
+                </span>
+            </td>
+            <td>
+                <span th:if="${studentThis.gradeValue >= 60}">
+                    <span th:text="${studentThis.studentName} " style="color:black"></span>
+                </span>
+                <span th:if="${studentThis.gradeValue < 60}">
+                    <span th:text="${studentThis.studentName} " style="color:red"></span>
+                </span>
+            </td>
+            <td>
+                <span th:if="${studentThis.gradeValue >= 60}">
+                    <span th:text="${studentThis.gradeValue} " style="color:black"></span>
+                </span>
+                <span th:if="${studentThis.gradeValue < 60}">
+                    <span th:text="${studentThis.gradeValue} " style="color:red"></span>
+                </span>
+            </td>
+            <td>
+                <span th:if="${studentThis.gradeValue >= 60}">
+                    <span th:text="${studentThis.comment} " style="color:black"></span>
+                </span>
+                <span th:if="${studentThis.gradeValue < 60}">
+                    <span th:text="${studentThis.comment} " style="color:red"></span>
+                </span>
+            </td>
+            <td>
+                <a th:href="@{/edit(method='editGrade',courseNo=${studentThis.courseNo}
+                ,courseTitle=${studentThis.courseTitle}
+                ,studentId=${studentThis.studentId}
+                ,studentName=${studentThis.studentName}
+                ,gradeValue=${studentThis.gradeValue}
+                ,comment=${studentThis.comment}
+                ,existGrade=${studentThis.existGrade})}">EDIT</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
