@@ -25,4 +25,32 @@ public class GradeDaoImpl extends BaseDao<StudentGrade> implements GradeDao {
 
         return getBeanList(sql, StudentGrade.class, userId);
     }
+
+    @Override
+    public void insertGrade(StudentGrade studentGrade) {
+        String sql = "insert into t_grade " +
+                "(COURSE_NO, " +
+                "STUDENT_USER_ID, " +
+                "GRADE_VALUE, " +
+                "GRADE_COMMENT) " +
+                "values (?,?,?,?)";
+        update(sql, studentGrade.getCourseNo(), studentGrade.getStudentUserId(), studentGrade.getGradeValue(),
+                studentGrade.getGradeComment());
+    }
+
+    @Override
+    public void deleteGrade(StudentGrade studentGrade) {
+        String sql = "delete from t_grade where COURSE_NO=? and STUDENT_USER_ID=? ";
+
+        update(sql, studentGrade.getCourseNo(), studentGrade.getStudentUserId());
+    }
+
+    @Override
+    public void updateGrade(StudentGrade studentGrade) {
+        String sql = "update t_grade set grade_value = ? , grade_comment = ? where COURSE_NO=? and STUDENT_USER_ID=? ";
+
+        update(sql, studentGrade.getGradeValue(), studentGrade.getGradeComment(), studentGrade.getCourseNo(),
+                studentGrade.getStudentUserId());
+    }
+
 }

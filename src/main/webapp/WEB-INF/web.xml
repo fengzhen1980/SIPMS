@@ -64,6 +64,15 @@
         <url-pattern>/work</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>editServlet</servlet-name>
+        <servlet-class>com.atguigu.imperial.court.servlet.module.EditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>editServlet</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>loginFilter</filter-name>
         <filter-class>com.atguigu.imperial.court.filter.LoginFilter</filter-class>

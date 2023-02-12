@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface GradeDao {
     public List<StudentGrade> selectGradeForOneStudent(String userId);
+
+    void insertGrade(StudentGrade studentGrade);
+
+    void deleteGrade(StudentGrade studentGrade);
+
+    void updateGrade(StudentGrade studentGrade);
 }

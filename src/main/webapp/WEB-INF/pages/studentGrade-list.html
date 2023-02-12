@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student-list</title>
+    <title>Your grade-list</title>
     <style type="text/css">
         table {
             border-collapse: collapse;
@@ -22,11 +22,11 @@
 <body>
 <div>
     <!-- register information -->
-    <span th:if="${session.loginInfo.userCategory == 'STUDENT'}">Student:
+    <span th:if="${session.loginInfo.userCategory == 'student'}">Student:
             <span th:text="${session.loginInfo.userFirstName} "></span>
             <span th:text="${session.loginInfo.userLastName} "></span>
     </span>
-    <span th:if="${session.loginInfo.userCategory == 'TEACHER'}">Teacher:
+    <span th:if="${session.loginInfo.userCategory == 'teacher'}">Teacher:
             <span th:text="${session.loginInfo.userFirstName} "></span>
             <span th:text="${session.loginInfo.userLastName} "></span>
     </span>

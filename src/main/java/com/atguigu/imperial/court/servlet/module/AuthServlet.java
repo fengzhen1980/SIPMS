@@ -43,7 +43,7 @@ public class AuthServlet extends ModelBaseServlet {
             if ("student".equalsIgnoreCase(tUser.getUserCategory())) {
                 response.sendRedirect(request.getContextPath() + "/grade?method=showGradeForOneStudent");
             } else {
-                response.sendRedirect(request.getContextPath() + "/student?method=showAllStudentInfo");
+                response.sendRedirect(request.getContextPath() + "/grade?method=showGradeForOneTeacher");
             }
 
 

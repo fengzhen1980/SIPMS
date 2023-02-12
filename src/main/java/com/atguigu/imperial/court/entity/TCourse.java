@@ -6,18 +6,18 @@ public class TCourse {
     private String courseNo;
     private String courseTitle;
     private long courseHours;
-    private String teacherUserName;
+    private String teacherUserId;
     private String courseDescription;
 
     public TCourse() {
     }
 
-    public TCourse(String courseNo, String courseTitle, long courseHours, String teacherUserName,
+    public TCourse(String courseNo, String courseTitle, long courseHours, String teacherUserId,
                    String courseDescription) {
         this.courseNo = courseNo;
         this.courseTitle = courseTitle;
         this.courseHours = courseHours;
-        this.teacherUserName = teacherUserName;
+        this.teacherUserId = teacherUserId;
         this.courseDescription = courseDescription;
     }
 
@@ -27,7 +27,7 @@ public class TCourse {
                 "courseNo=" + courseNo +
                 ", courseTitle=" + courseTitle +
                 ", courseHours=" + courseHours +
-                ", teacherUserName=" + teacherUserName +
+                ", teacherUserId=" + teacherUserId +
                 ", courseDescription=" + courseDescription + "}";
     }
 
@@ -58,12 +58,12 @@ public class TCourse {
     }
 
 
-    public String getTeacherUserName() {
-        return teacherUserName;
+    public String getTeacherUserId() {
+        return teacherUserId;
     }
 
-    public void setTeacherUserName(String teacherUserName) {
-        this.teacherUserName = teacherUserName;
+    public void setTeacherUserId(String teacherUserId) {
+        this.teacherUserId = teacherUserId;
     }
 
     public String getCourseDescription() {

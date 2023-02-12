@@ -1,7 +1,10 @@
 package com.atguigu.imperial.court.servlet.module;
 
+import com.atguigu.imperial.court.entity.TCourse;
 import com.atguigu.imperial.court.entity.TUser;
+import com.atguigu.imperial.court.service.api.CourseService;
 import com.atguigu.imperial.court.service.api.RegisterService;
+import com.atguigu.imperial.court.service.impl.CourseServiceImpl;
 import com.atguigu.imperial.court.service.impl.RegisterServiceImpl;
 import com.atguigu.imperial.court.servlet.base.ModelBaseServlet;
 import com.atguigu.imperial.court.util.SipmsCourtConst;
@@ -15,6 +18,8 @@ public class RegisterServlet extends ModelBaseServlet {
 
     // creat service
     private RegisterService registerService = new RegisterServiceImpl();
+
+    private CourseService courseService = new CourseServiceImpl();
 
     protected void initRegister(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,8 +35,6 @@ public class RegisterServlet extends ModelBaseServlet {
 
     protected void doRegister(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        System.out.println("===doRegister===");
 
         boolean inputErrFlag = false;
 
@@ -90,6 +93,17 @@ public class RegisterServlet extends ModelBaseServlet {
             writeBack(newUser, request);
         } else {
             registerService.registerUser(newUser);
+
+            if ("teacher".equals(userCategory)) {
+                String courseNo = request.getParameter("courseNo");
+                String courseTitle = request.getParameter("courseTitle");
+                TCourse course = new TCourse();
+                course.setCourseNo(courseNo);
+                course.setCourseTitle(courseTitle);
+                course.setTeacherUserId(userId);
+                courseService.insertCourse(course);
+            }
+
             request.setAttribute("registerOkMessage", SipmsCourtConst.REGISTER_OK_MESSAGE);
             clearUserInfo(request);
         }

@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <title>Student Information Management System</title>
     <link rel="stylesheet" type="text/css" href="register.css" media="screen"/>
+    <script type="text/javascript">
+        function categoryChang() {
+            var obj = document.getElementById("userCategory");
+            var obj1 = document.getElementById("courseNo");
+            var obj2 = document.getElementById("courseTitle");
+            if (obj.value == "teacher") {
+                obj1.disabled = false;
+                obj2.disabled = false;
+            } else {
+                obj1.value = "";
+                obj2.value = "";
+                obj1.disabled = true;
+                obj2.disabled = true;
+            }
+        }
+    </script>
 </head>
 <body>
+<div>
+    <a th:href="@{/auth?method=logout}">Go Home page</a>
+</div>
 <form th:action="@{/register}" method="post">
     <input type="hidden" name="method" value="doRegister"/>
     <table style="margin: auto; width: 900px;background-color: antiquewhite; border-collapse:collapse">
@@ -54,7 +73,8 @@
                 Category:
             </td>
             <td style="text-align: left">
-                <select name="userCategory" style="width: 100px; font-size: large">
+                <select id="userCategory" name="userCategory" style="width: 100px; font-size: large"
+                        onchange="categoryChang()">
                     <option th:selected="${userCategory==''}" value=""></option>
                     <option th:selected="${userCategory=='student'}" value="student">student</option>
                     <option th:selected="${userCategory=='teacher'}" value="teacher">teacher</option>
@@ -62,6 +82,13 @@
             </td>
             <td style="text-align: left">
                 <p style="color:red; font-weight: bold;" th:text="${userCategoryErrMsg}"></p>
+            </td>
+        </tr>
+        <tr style="height: 50px">
+            <td colspan="3">
+                Course No<input type="text" id="courseNo" name="courseNo" MAXLENGTH="10" th:value="${courseNo}"/>
+                Course Title<input type="text" id="courseTitle" name="courseTitle" MAXLENGTH="50"
+                                   th:value="${courseTitle}"/>
             </td>
         </tr>
         <tr style="height: 50px">
