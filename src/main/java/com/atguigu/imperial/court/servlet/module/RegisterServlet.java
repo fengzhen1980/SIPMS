@@ -47,6 +47,8 @@ public class RegisterServlet extends ModelBaseServlet {
         String userFirstName = request.getParameter("userFirstName");
         String userLastName = request.getParameter("userLastName");
         String userAge = request.getParameter("userAge");
+        String courseNo = request.getParameter("courseNo");
+        String courseTitle = request.getParameter("courseTitle");
         if (userAge.isEmpty()) {
             userAge = "0";
         }
@@ -75,6 +77,16 @@ public class RegisterServlet extends ModelBaseServlet {
         if (userCategory == null || userCategory.trim().isEmpty()) {
             request.setAttribute("userCategoryErrMsg", ("Category" + SipmsCourtConst.REQUIRED_MESSAGE));
             inputErrFlag = true;
+        } else {
+            if (userCategory.equals("teacher")) {
+                if (courseNo == null || courseNo.trim().isEmpty()) {
+                    request.setAttribute("userCategoryErrMsg", ("Course No" + SipmsCourtConst.REQUIRED_MESSAGE));
+                    inputErrFlag = true;
+                } else if (courseNo == null || courseNo.trim().isEmpty()) {
+                    request.setAttribute("userCategoryErrMsg", ("Course Title" + SipmsCourtConst.REQUIRED_MESSAGE));
+                    inputErrFlag = true;
+                }
+            }
         }
         if (userFirstName == null || userFirstName.trim().isEmpty()) {
             request.setAttribute("firstNameErrMsg", ("First Name" + SipmsCourtConst.REQUIRED_MESSAGE));
@@ -95,8 +107,7 @@ public class RegisterServlet extends ModelBaseServlet {
             registerService.registerUser(newUser);
 
             if ("teacher".equals(userCategory)) {
-                String courseNo = request.getParameter("courseNo");
-                String courseTitle = request.getParameter("courseTitle");
+
                 TCourse course = new TCourse();
                 course.setCourseNo(courseNo);
                 course.setCourseTitle(courseTitle);
@@ -135,5 +146,7 @@ public class RegisterServlet extends ModelBaseServlet {
         request.setAttribute("userGender", "");
         request.setAttribute("userEmail", "");
         request.setAttribute("userAddress", "");
+        request.setAttribute("courseNo", "");
+        request.setAttribute("courseTitle", "");
     }
 }
