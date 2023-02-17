@@ -56,9 +56,6 @@ public class RegisterServlet extends ModelBaseServlet {
         String userEmail = request.getParameter("userEmail");
         String userAddress = request.getParameter("userAddress");
 
-        TUser newUser = new TUser(userId, password, userCategory, userFirstName, userLastName,
-                Integer.parseInt(userAge), userGender, userEmail, userAddress);
-
         // 检查userId是否已经存在
         TUser userEntity = registerService.getUserByUserId(userId);
         if (userEntity != null) {
@@ -69,6 +66,12 @@ public class RegisterServlet extends ModelBaseServlet {
         if (password == null || password.trim().isEmpty()) {
             request.setAttribute("passwordErrMsg", ("Password" + SipmsCourtConst.REQUIRED_MESSAGE));
             inputErrFlag = true;
+        } else {
+            String reg = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
+            if (!password.matches(reg)) {
+                request.setAttribute("passwordErrMsg", ("Password" + SipmsCourtConst.PW_NG_MESSAGE));
+                inputErrFlag = true;
+            }
         }
         if (!password.equals(passwordAgain)) {
             request.setAttribute("passwordAgainErrMsg", SipmsCourtConst.PW_AGAIN_MESSAGE);
@@ -96,14 +99,37 @@ public class RegisterServlet extends ModelBaseServlet {
             request.setAttribute("lastNameErrMsg", ("Last Name" + SipmsCourtConst.REQUIRED_MESSAGE));
             inputErrFlag = true;
         }
+        try {
+            Integer userAgeNum = Integer.parseInt(userAge);
+            if (userAgeNum < 0) {
+                request.setAttribute("ageErrMsg", ("Age" + SipmsCourtConst.POSITIVE_INT_MESSAGE));
+                inputErrFlag = true;
+            }
+        } catch (Exception e) {
+            request.setAttribute("ageErrMsg", ("Age" + SipmsCourtConst.POSITIVE_INT_MESSAGE));
+            inputErrFlag = true;
+        }
+
         if (userEmail == null || userEmail.trim().isEmpty()) {
             request.setAttribute("emailErrMsg", ("Email" + SipmsCourtConst.REQUIRED_MESSAGE));
             inputErrFlag = true;
         }
 
         if (inputErrFlag) {
-            writeBack(newUser, request);
+            request.setAttribute("userId", userId);
+            request.setAttribute("password", password);
+            request.setAttribute("userCategory", userCategory);
+            request.setAttribute("userFirstName", userFirstName);
+            request.setAttribute("userLastName", userLastName);
+            request.setAttribute("userAge", userAge);
+            request.setAttribute("userGender", userGender);
+            request.setAttribute("userEmail", userEmail);
+            request.setAttribute("userAddress", userAddress);
+
         } else {
+            TUser newUser = new TUser(userId, password, userCategory, userFirstName, userLastName,
+                    Integer.parseInt(userAge), userGender, userEmail, userAddress);
+
             registerService.registerUser(newUser);
 
             if ("teacher".equals(userCategory)) {
@@ -122,18 +148,6 @@ public class RegisterServlet extends ModelBaseServlet {
         templateName = "register";
         processTemplate(templateName, request, response);
 
-    }
-
-    private void writeBack(TUser user, HttpServletRequest request) {
-        request.setAttribute("userId", user.getUserId());
-        request.setAttribute("password", user.getUserPassword());
-        request.setAttribute("userCategory", user.getUserCategory());
-        request.setAttribute("userFirstName", user.getUserFirstName());
-        request.setAttribute("userLastName", user.getUserLastName());
-        request.setAttribute("userAge", user.getUserAge());
-        request.setAttribute("userGender", user.getUserGender());
-        request.setAttribute("userEmail", user.getUserEmail());
-        request.setAttribute("userAddress", user.getUserAddress());
     }
 
     private void clearUserInfo(HttpServletRequest request) {
