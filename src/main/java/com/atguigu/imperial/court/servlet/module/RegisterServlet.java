@@ -69,7 +69,7 @@ public class RegisterServlet extends ModelBaseServlet {
         } else {
             String reg = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
             if (!password.matches(reg)) {
-                request.setAttribute("passwordErrMsg", ("Password" + SipmsCourtConst.PW_NG_MESSAGE));
+                request.setAttribute("passwordErrMsg", SipmsCourtConst.PW_NG_MESSAGE);
                 inputErrFlag = true;
             }
         }
