@@ -14,4 +14,5 @@ public class SipmsCourtConst {
     public static final String PW_AGAIN_MESSAGE = "The password must be the same for both entries";
     public static final String REGISTER_OK_MESSAGE = "The user is registered successfully.";
     public static final String POSITIVE_INT_MESSAGE = " must be a positive integer.";
+    public static final String EMAIL_ERR_MESSAGE = " The Email format is incorrect.";
 }

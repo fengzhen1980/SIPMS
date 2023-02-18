@@ -113,6 +113,12 @@ public class RegisterServlet extends ModelBaseServlet {
         if (userEmail == null || userEmail.trim().isEmpty()) {
             request.setAttribute("emailErrMsg", ("Email" + SipmsCourtConst.REQUIRED_MESSAGE));
             inputErrFlag = true;
+        } else {
+            String emailReg = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+            if (!userEmail.matches(emailReg)) {
+                request.setAttribute("emailErrMsg", (SipmsCourtConst.EMAIL_ERR_MESSAGE));
+                inputErrFlag = true;
+            }
         }
 
         if (inputErrFlag) {

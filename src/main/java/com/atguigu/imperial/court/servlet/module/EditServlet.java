@@ -61,13 +61,40 @@ public class EditServlet extends ModelBaseServlet {
         String comment = request.getParameter("comment");
         String existGrade = request.getParameter("existGrade");
 
-        System.out.println("===courseNo===" + courseNo);
-        System.out.println("===courseTitle===" + courseTitle);
-        System.out.println("===studentId===" + studentId);
-        System.out.println("===studentName===" + studentName);
-        System.out.println("===gradeValue===" + gradeValue);
-        System.out.println("===comment===" + comment);
-        System.out.println("===existGrade===" + existGrade);
+        try {
+            Integer gradeValueNum = Integer.parseInt(gradeValue);
+            if (gradeValueNum < 0) {
+                request.setAttribute("gradeErrMsg", ("Grade" + SipmsCourtConst.POSITIVE_INT_MESSAGE));
+                TeacherGrade studentGradeItem = new TeacherGrade();
+                studentGradeItem.setCourseNo(courseNo);
+                studentGradeItem.setCourseTitle(courseTitle);
+                studentGradeItem.setStudentId(studentId);
+                studentGradeItem.setStudentName(studentName);
+                studentGradeItem.setGradeValue(gradeValue);
+                studentGradeItem.setComment(comment);
+                studentGradeItem.setExistGrade(existGrade);
+
+                request.setAttribute("studentGradeItem", studentGradeItem);
+
+                String templateName = "gradeEdit";
+                processTemplate(templateName, request, response);
+            }
+        } catch (Exception e) {
+            request.setAttribute("gradeErrMsg", ("Grade" + SipmsCourtConst.POSITIVE_INT_MESSAGE));
+            TeacherGrade studentGradeItem = new TeacherGrade();
+            studentGradeItem.setCourseNo(courseNo);
+            studentGradeItem.setCourseTitle(courseTitle);
+            studentGradeItem.setStudentId(studentId);
+            studentGradeItem.setStudentName(studentName);
+            studentGradeItem.setGradeValue(gradeValue);
+            studentGradeItem.setComment(comment);
+            studentGradeItem.setExistGrade(existGrade);
+
+            request.setAttribute("studentGradeItem", studentGradeItem);
+
+            String templateName = "gradeEdit";
+            processTemplate(templateName, request, response);
+        }
 
         StudentGrade studentGradeItem = new StudentGrade();
         studentGradeItem.setCourseNo(courseNo);

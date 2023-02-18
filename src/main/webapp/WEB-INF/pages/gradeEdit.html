@@ -51,30 +51,33 @@
     <table style="margin: auto; width: 900px;background-color: white; border-collapse:collapse;">
         <tr>
             <td style="text-align:right; width: 30%">Course No.</td>
-            <td th:text="${studentGradeItem.courseNo}"></td>
+            <td th:text="${studentGradeItem.courseNo}" colspan="2"></td>
         </tr>
         <tr>
             <td style="text-align:right; width: 30%">Course Title</td>
-            <td th:text="${studentGradeItem.courseTitle}"></td>
+            <td th:text="${studentGradeItem.courseTitle}" colspan="2"></td>
         </tr>
         <tr>
             <td style="text-align:right; width: 30%">Student Id</td>
-            <td th:text="${studentGradeItem.studentId}"></td>
+            <td th:text="${studentGradeItem.studentId}" colspan="2"></td>
         </tr>
         <tr>
             <td style="text-align:right; width: 30%">Student Name</td>
-            <td th:text="${studentGradeItem.studentName}"></td>
+            <td th:text="${studentGradeItem.studentName}" colspan="2"></td>
         </tr>
         <tr>
             <td style="text-align:right; width: 30%">Grade</td>
-            <td style="text-align: left">
+            <td style="text-align:left; width: 30%">
                 <input type="text" id="gradeValue" name="gradeValue" size="10 px"
                        th:value="${studentGradeItem.gradeValue}"/>
+            </td>
+            <td style="text-align: left">
+                <p style="color:red; font-weight: bold;" th:text="${gradeErrMsg}"></p>
             </td>
         </tr>
         <tr>
             <td style="text-align:right; width: 30%">Comment</td>
-            <td style="text-align: left">
+            <td style="text-align: left" colspan="2">
                 <input type="text" id="comment" name="comment" size="100 px" th:value="${studentGradeItem.comment}"/>
             </td>
         </tr>
