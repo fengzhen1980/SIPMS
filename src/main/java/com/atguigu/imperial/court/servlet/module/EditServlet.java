@@ -57,13 +57,30 @@ public class EditServlet extends ModelBaseServlet {
         String courseTitle = request.getParameter("courseTitle");
         String studentId = request.getParameter("studentId");
         String studentName = request.getParameter("studentName");
-        String gradeValue = request.getParameter("gradeValue");
+        String gradeValue = request.getParameter("gradeValue").trim();
         String comment = request.getParameter("comment");
         String existGrade = request.getParameter("existGrade");
 
-        try {
-            Integer gradeValueNum = Integer.parseInt(gradeValue);
-            if (gradeValueNum < 0) {
+        if (gradeValue != null && !gradeValue.isEmpty()) {
+            try {
+                Integer gradeValueNum = Integer.parseInt(gradeValue);
+                if (gradeValueNum < 0) {
+                    request.setAttribute("gradeErrMsg", ("Grade" + SipmsCourtConst.POSITIVE_INT_MESSAGE));
+                    TeacherGrade studentGradeItem = new TeacherGrade();
+                    studentGradeItem.setCourseNo(courseNo);
+                    studentGradeItem.setCourseTitle(courseTitle);
+                    studentGradeItem.setStudentId(studentId);
+                    studentGradeItem.setStudentName(studentName);
+                    studentGradeItem.setGradeValue(gradeValue);
+                    studentGradeItem.setComment(comment);
+                    studentGradeItem.setExistGrade(existGrade);
+
+                    request.setAttribute("studentGradeItem", studentGradeItem);
+
+                    String templateName = "gradeEdit";
+                    processTemplate(templateName, request, response);
+                }
+            } catch (Exception e) {
                 request.setAttribute("gradeErrMsg", ("Grade" + SipmsCourtConst.POSITIVE_INT_MESSAGE));
                 TeacherGrade studentGradeItem = new TeacherGrade();
                 studentGradeItem.setCourseNo(courseNo);
@@ -79,21 +96,6 @@ public class EditServlet extends ModelBaseServlet {
                 String templateName = "gradeEdit";
                 processTemplate(templateName, request, response);
             }
-        } catch (Exception e) {
-            request.setAttribute("gradeErrMsg", ("Grade" + SipmsCourtConst.POSITIVE_INT_MESSAGE));
-            TeacherGrade studentGradeItem = new TeacherGrade();
-            studentGradeItem.setCourseNo(courseNo);
-            studentGradeItem.setCourseTitle(courseTitle);
-            studentGradeItem.setStudentId(studentId);
-            studentGradeItem.setStudentName(studentName);
-            studentGradeItem.setGradeValue(gradeValue);
-            studentGradeItem.setComment(comment);
-            studentGradeItem.setExistGrade(existGrade);
-
-            request.setAttribute("studentGradeItem", studentGradeItem);
-
-            String templateName = "gradeEdit";
-            processTemplate(templateName, request, response);
         }
 
         StudentGrade studentGradeItem = new StudentGrade();
@@ -104,7 +106,7 @@ public class EditServlet extends ModelBaseServlet {
         studentGradeItem.setGradeComment(comment);
 
         if ("yes".equals(existGrade)) {
-            if ((gradeValue != null && !gradeValue.equals("")) || (comment != null && !comment.equals(""))) {
+            if ((gradeValue != null && !gradeValue.trim().equals("")) || (comment != null && !comment.equals(""))) {
                 gradeService.updateGrade(studentGradeItem);
             } else {
                 gradeService.deleteGrade(studentGradeItem);

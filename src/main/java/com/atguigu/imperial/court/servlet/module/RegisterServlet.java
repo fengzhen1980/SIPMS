@@ -85,8 +85,11 @@ public class RegisterServlet extends ModelBaseServlet {
                 if (courseNo == null || courseNo.trim().isEmpty()) {
                     request.setAttribute("userCategoryErrMsg", ("Course No" + SipmsCourtConst.REQUIRED_MESSAGE));
                     inputErrFlag = true;
-                } else if (courseNo == null || courseNo.trim().isEmpty()) {
+                } else if (courseTitle == null || courseTitle.trim().isEmpty()) {
                     request.setAttribute("userCategoryErrMsg", ("Course Title" + SipmsCourtConst.REQUIRED_MESSAGE));
+                    inputErrFlag = true;
+                } else if (courseService.getCourseByCourseNo(courseNo) != null) {
+                    request.setAttribute("userCategoryErrMsg", (SipmsCourtConst.COURSE_EXIST_MESSAGE));
                     inputErrFlag = true;
                 }
             }
@@ -131,6 +134,8 @@ public class RegisterServlet extends ModelBaseServlet {
             request.setAttribute("userGender", userGender);
             request.setAttribute("userEmail", userEmail);
             request.setAttribute("userAddress", userAddress);
+            request.setAttribute("courseNo", courseNo);
+            request.setAttribute("courseTitle", courseTitle);
 
         } else {
             TUser newUser = new TUser(userId, password, userCategory, userFirstName, userLastName,

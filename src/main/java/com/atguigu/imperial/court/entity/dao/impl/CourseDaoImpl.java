@@ -28,4 +28,17 @@ public class CourseDaoImpl extends BaseDao<TCourse> implements CourseDao {
                 "values (?,?,?)";
         update(sql, course.getCourseNo(), course.getCourseTitle(), course.getTeacherUserId());
     }
+
+    @Override
+    public TCourse selectCourseByCourseNo(String courseNo) {
+
+        String sql = "select COURSE_NO courseNo, " +
+                "COURSE_TITLE courseTitle, " +
+                "COURSE_HOURS courseHours, " +
+                "TEACHER_USER_ID teacherUserId, " +
+                "COURSE_DESCRIPTION courseDescription " +
+                "from t_course where Course_No=? ";
+
+        return super.getSingleBean(sql, TCourse.class, courseNo);
+    }
 }

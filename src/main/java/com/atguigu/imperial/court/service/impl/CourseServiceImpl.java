@@ -15,6 +15,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public TCourse getCourseByCourseNo(String CourseNo) {
+        return courseDao.selectCourseByCourseNo(CourseNo);
+    }
+
+    @Override
     public void insertCourse(TCourse course) {
         courseDao.insertCourse(course);
     }

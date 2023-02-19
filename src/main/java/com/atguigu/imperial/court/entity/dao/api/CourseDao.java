@@ -6,4 +6,6 @@ public interface CourseDao {
     TCourse selectCourseByTeacherId(String userId);
 
     void insertCourse(TCourse course);
+
+    TCourse selectCourseByCourseNo(String courseNo);
 }

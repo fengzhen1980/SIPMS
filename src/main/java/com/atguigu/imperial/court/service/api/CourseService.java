@@ -6,5 +6,7 @@ public interface CourseService {
 
     TCourse getCourseByTeacherId(String userId);
 
+    TCourse getCourseByCourseNo(String CourseNo);
+
     void insertCourse(TCourse course);
 }

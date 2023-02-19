@@ -9,6 +9,7 @@ public class SipmsCourtConst {
     public static final String LOGIN_USER_ATTR_NAME = "loginInfo";
 
     public static final String USERID_EXIST_MESSAGE = "The user Id have been used. Please change other user Id.";
+    public static final String COURSE_EXIST_MESSAGE = "The course No is exist. Please change other course No.";
     public static final String REQUIRED_MESSAGE = " is required";
     public static final String PW_NG_MESSAGE = "The password must contain letters and numbers (6 to 16 characters).";
     public static final String PW_AGAIN_MESSAGE = "The password must be the same for both entries";
