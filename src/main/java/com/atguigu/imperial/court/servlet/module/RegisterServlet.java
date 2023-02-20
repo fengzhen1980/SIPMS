@@ -67,7 +67,8 @@ public class RegisterServlet extends ModelBaseServlet {
             request.setAttribute("passwordErrMsg", ("Password" + SipmsCourtConst.REQUIRED_MESSAGE));
             inputErrFlag = true;
         } else {
-            String reg = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
+            // String reg = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
+            String reg = "/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#%^&*?]).{6,16}$/";
             if (!password.matches(reg)) {
                 request.setAttribute("passwordErrMsg", SipmsCourtConst.PW_NG_MESSAGE);
                 inputErrFlag = true;
